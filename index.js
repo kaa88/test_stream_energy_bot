@@ -18,12 +18,12 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
     console.log(JSON.stringify({ ...req.body }));
+    bot.processUpdate(req.body);
 
     const chatId = req.body.chat?.id;
     const text = req.body.text;
     await bot.sendMessage(chatId, `Recieved your message: ${text}`);
 
-    // bot.processUpdate(req.body);
     res.sendStatus(200);
   } catch (e) {
     console.error(e.message || "ERROR");
