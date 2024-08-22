@@ -17,6 +17,7 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
+    console.log("--chat id", req.body.chat?.id);
     console.log(JSON.stringify({ ...req.body }));
     bot.processUpdate(req.body);
 
