@@ -21,6 +21,10 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     const lang = req.body.message?.from?.language_code;
     const text = req.body.message?.text;
 
+    console.log("chatId", chatId);
+    console.log("lang", lang);
+    console.log("text", text);
+
     if (!chatId || !text)
       throw new Error("Cannot send message with missing props");
 
