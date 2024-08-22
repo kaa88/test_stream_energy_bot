@@ -26,7 +26,12 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.post("/web-data", (req, res) => {
+app.get("/", (req, res) => {
+  console.log("GET");
+  console.log(req.body);
+});
+app.post("/", (req, res) => {
+  console.log("POST");
   console.log(req.body);
 });
 
