@@ -17,13 +17,12 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
-    const parsed = JSON.parse(req.body);
-    console.log("--chat id", parsed.chat?.id);
+    console.log("--chat id", req.body.message?.chat?.id);
     console.log(JSON.stringify({ ...req.body }));
     bot.processUpdate(req.body);
 
-    const chatId = req.body.chat?.id;
-    const text = req.body.text;
+    const chatId = req.body.message?.chat?.id;
+    const text = req.body.message?.text;
     await bot.sendMessage(chatId, `Recieved your message: ${text}`);
 
     res.sendStatus(200);
