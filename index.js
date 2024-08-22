@@ -20,6 +20,10 @@ app.post(`/bot${TOKEN}`, (req, res) => {
   console.log(JSON.stringify(req.body));
   bot.processUpdate(req.body);
   res.sendStatus(200);
+
+  const chatId = msg.chat.id;
+  const text = msg.text;
+  bot.sendMessage(chatId, `Recieved your message: ${text}`);
 });
 
 const PORT = 8000;
