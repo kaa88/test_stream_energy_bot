@@ -27,11 +27,11 @@ bot.on("message", async (msg) => {
 });
 
 app.get("/", (req, res) => {
-  console.log("GET");
+  console.log("method-GET");
   console.log(req.body);
 });
 app.post("/", (req, res) => {
-  console.log("POST");
+  console.log("method-POST");
   console.log(req.body);
 });
 
