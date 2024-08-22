@@ -25,16 +25,9 @@ bot.on("message", async (msg) => {
         inline_keyboard: [[{ text: "Открыть", web_app: { url: webAppUrl } }]],
       },
     });
+  } else {
+    await bot.sendMessage(chatId, "Message recieved");
   }
-});
-
-setTimeout(() => {
-  bot.getUpdates();
-}, 3000);
-
-app.post("/", (req, res) => {
-  console.log("method-POST");
-  console.log(JSON.stringify(req.body));
 });
 
 const PORT = 8000;
