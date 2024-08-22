@@ -17,11 +17,11 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   console.log("try to update");
-  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify({ ...req.body }));
   // bot.processUpdate(req.body);
   // res.sendStatus(200);
 
-  const chatId = req.body.chat.id;
+  const chatId = req.body.chat?.id;
   const text = req.body.text;
   await bot.sendMessage(chatId, `Recieved your message: ${text}`);
 });
