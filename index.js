@@ -17,6 +17,7 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, (req, res) => {
   console.log("try to update");
+  console.log(JSON.stringify(req.body));
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
