@@ -23,7 +23,8 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     const lang = req.body.message?.from?.language_code;
     const text = req.body.message?.text;
 
-    if (!chatId) throw new Error("chatId is undefined");
+    if (!chatId || !text)
+      throw new Error("Cannot send message with missing props");
 
     if (text === "/start") {
       await bot.sendMessage(chatId, {
