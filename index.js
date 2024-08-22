@@ -15,15 +15,15 @@ const bot = new TelegramBot(TOKEN);
 
 bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
-app.post(`/bot${TOKEN}`, (req, res) => {
+app.post(`/bot${TOKEN}`, async (req, res) => {
   console.log("try to update");
   console.log(JSON.stringify(req.body));
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
+  // bot.processUpdate(req.body);
+  // res.sendStatus(200);
 
   const chatId = req.body.chat.id;
   const text = req.body.text;
-  bot.sendMessage(chatId, `Recieved your message: ${text}`);
+  await bot.sendMessage(chatId, `Recieved your message: ${text}`);
 });
 
 const PORT = 8000;
@@ -51,3 +51,27 @@ bot.on("message", async (msg) => {
     await bot.sendMessage(chatId, "Message recieved");
   }
 });
+
+// const obj = {
+//   update_id: 72118410,
+//   message: {
+//     message_id: 56,
+//     from: {
+//       id: 2002404230,
+//       is_bot: false,
+//       first_name: "Andrei",
+//       last_name: "K",
+//       username: "kaa021088",
+//       language_code: "ru",
+//     },
+//     chat: {
+//       id: 2002404230,
+//       first_name: "Andrei",
+//       last_name: "K",
+//       username: "kaa021088",
+//       type: "private",
+//     },
+//     date: 1724313155,
+//     text: "64",
+//   },
+// };
