@@ -13,26 +13,19 @@ const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, { polling: true });
 
-app.get("/", (req, res) => {
-  console.log("method-GET");
-  console.log(JSON.stringify(req.body));
-});
-app.post("/", (req, res) => {
-  console.log("method-POST");
-  console.log(JSON.stringify(req.body));
+bot.on("message", async (msg) => {
+  const chatId = msg.chat.id;
+  const text = msg.text;
 
-  bot.on("message", async (msg) => {
-    const chatId = msg.chat.id;
-    const text = msg.text;
+  console.log("userMessage:", text);
 
-    if (text === "/start") {
-      await bot.sendMessage(chatId, "Гороскоп", {
-        reply_markup: {
-          inline_keyboard: [[{ text: "Открыть", web_app: { url: webAppUrl } }]],
-        },
-      });
-    }
-  });
+  if (text === "/start") {
+    await bot.sendMessage(chatId, "Гороскоп", {
+      reply_markup: {
+        inline_keyboard: [[{ text: "Открыть", web_app: { url: webAppUrl } }]],
+      },
+    });
+  }
 });
 
 const PORT = 8000;
