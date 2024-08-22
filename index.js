@@ -16,6 +16,7 @@ const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, (req, res) => {
+  console.log("try to update");
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
