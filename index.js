@@ -13,6 +13,10 @@ const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, { polling: true });
 
+bot.on("poll", () => {
+  console.log("poll");
+});
+
 bot.on("polling_error", (error) => {
   console.log(error.code);
   console.log(error.message);
@@ -25,9 +29,11 @@ bot.on("message", async (msg) => {
   console.log("userMessage:", text);
 
   if (text === "/start") {
-    await bot.sendMessage(chatId, "Гороскоп", {
+    await bot.sendMessage(chatId, {
       reply_markup: {
-        inline_keyboard: [[{ text: "Открыть", web_app: { url: webAppUrl } }]],
+        inline_keyboard: [
+          [{ text: "Открыть Гороскоп", web_app: { url: webAppUrl } }],
+        ],
       },
     });
   } else {
