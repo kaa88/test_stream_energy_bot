@@ -28,6 +28,10 @@ bot.on("message", async (msg) => {
   }
 });
 
+setTimeout(() => {
+  bot.getUpdates();
+}, 3000);
+
 app.post("/", (req, res) => {
   console.log("method-POST");
   console.log(JSON.stringify(req.body));
