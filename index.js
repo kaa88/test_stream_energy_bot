@@ -17,32 +17,32 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
+    bot.processUpdate(req.body);
+
     const chatId = req.body.message?.chat?.id;
     const lang = req.body.message?.from?.language_code;
     const text = req.body.message?.text;
 
-    console.log("chatId", chatId);
-    console.log("lang", lang);
-    console.log("text", text);
-
     if (!chatId || !text)
       throw new Error("Cannot send message with missing props");
 
-    bot.processUpdate(req.body);
-
     if (text === "/start") {
-      await bot.sendMessage(chatId, {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: lang === "ru" ? "Открыть гороскоп" : "Open horoscope",
-                web_app: { url: WEB_APP_URL },
-              },
+      await bot.sendMessage(
+        chatId,
+        lang === "ru" ? "Открыть гороскоп" : "Open horoscope",
+        {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "mini app",
+                  web_app: { url: WEB_APP_URL },
+                },
+              ],
             ],
-          ],
-        },
-      });
+          },
+        }
+      );
     } else {
       await bot.sendMessage(
         chatId,
