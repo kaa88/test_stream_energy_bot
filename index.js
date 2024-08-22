@@ -18,10 +18,12 @@ bot.on("poll", () => {
 });
 
 bot.on("polling_error", (error) => {
+  console.log("---polling_error");
   console.log(error.code);
   console.log(error.message);
 });
 bot.on("error", (error) => {
+  console.log("---error");
   console.log(error.code);
   console.log(error.message);
 });
