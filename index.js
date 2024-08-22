@@ -21,8 +21,8 @@ app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 
-  const chatId = msg.chat.id;
-  const text = msg.text;
+  const chatId = req.body.chat.id;
+  const text = req.body.text;
   bot.sendMessage(chatId, `Recieved your message: ${text}`);
 });
 
