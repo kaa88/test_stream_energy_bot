@@ -17,14 +17,14 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
-    bot.processUpdate(req.body);
-
     const chatId = req.body.message?.chat?.id;
     const lang = req.body.message?.from?.language_code;
     const text = req.body.message?.text;
 
     if (!chatId || !text)
       throw new Error("Cannot send message with missing props");
+
+    bot.processUpdate(req.body);
 
     if (text === "/start") {
       await bot.sendMessage(chatId, {
