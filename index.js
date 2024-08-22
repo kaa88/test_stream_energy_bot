@@ -13,6 +13,11 @@ const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, { polling: true });
 
+bot.on("polling_error", (error) => {
+  console.log(error.code);
+  console.log(error.message);
+});
+
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
