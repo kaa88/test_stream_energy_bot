@@ -21,6 +21,10 @@ bot.on("polling_error", (error) => {
   console.log(error.code);
   console.log(error.message);
 });
+bot.on("error", (error) => {
+  console.log(error.code);
+  console.log(error.message);
+});
 
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
@@ -45,3 +49,7 @@ const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server has been started at port ${PORT}...`);
 });
+
+setTimeout(() => {
+  console.log(`AAAAAAAAAAAAAAAAAAAAAAA...`);
+}, 5000);
