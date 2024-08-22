@@ -26,6 +26,10 @@ bot.on("message", async (msg) => {
   }
 });
 
+app.post("/web-data", (req, res) => {
+  console.log(req.body);
+});
+
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server has been started at port ${PORT}...`);
