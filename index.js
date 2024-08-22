@@ -28,6 +28,11 @@ bot.on("message", async (msg) => {
   }
 });
 
+app.post("/", (req, res) => {
+  console.log("method-POST");
+  console.log(JSON.stringify(req.body));
+});
+
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server has been started at port ${PORT}...`);
