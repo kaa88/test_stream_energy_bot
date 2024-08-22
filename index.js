@@ -53,5 +53,5 @@ app.listen(PORT, () => {
 });
 
 setTimeout(() => {
-  console.log(`AAAAAAAAAAAAAAAAAAAAAAA...`);
+  console.error(`AAAAAAAAAAAAAAAAAAAAAAA...`);
 }, 10000);
