@@ -17,13 +17,33 @@ bot.setWebHook(`${BOT_URL}/bot${TOKEN}`);
 
 app.post(`/bot${TOKEN}`, async (req, res) => {
   try {
-    console.log("--chat id", req.body.message?.chat?.id);
-    console.log(JSON.stringify({ ...req.body }));
     bot.processUpdate(req.body);
 
     const chatId = req.body.message?.chat?.id;
+    const lang = req.body.message?.from?.language_code;
     const text = req.body.message?.text;
-    await bot.sendMessage(chatId, `Recieved your message: ${text}`);
+
+    if (!chatId) throw new Error("chatId is undefined");
+
+    if (text === "/start") {
+      await bot.sendMessage(chatId, {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: lang === "ru" ? "Открыть гороскоп" : "Open horoscope",
+                web_app: { url: WEB_APP_URL },
+              },
+            ],
+          ],
+        },
+      });
+    } else {
+      await bot.sendMessage(
+        chatId,
+        `${lang === "ru" ? "Неизвестный запрос" : "Unknown request"} "${text}"`
+      );
+    }
 
     res.sendStatus(200);
   } catch (e) {
@@ -35,48 +55,3 @@ const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server has been started at port ${PORT}...`);
 });
-
-/////
-
-// bot.on("message", async (msg) => {
-//   const chatId = msg.chat.id;
-//   const text = msg.text;
-
-//   console.log("userMessage:", text);
-
-//   if (text === "/start") {
-//     await bot.sendMessage(chatId, {
-//       reply_markup: {
-//         inline_keyboard: [
-//           [{ text: "Открыть Гороскоп", web_app: { url: WEB_APP_URL } }],
-//         ],
-//       },
-//     });
-//   } else {
-//     await bot.sendMessage(chatId, "Message recieved");
-//   }
-// });
-
-// const obj = {
-//   update_id: 72118410,
-//   message: {
-//     message_id: 56,
-//     from: {
-//       id: 2002404230,
-//       is_bot: false,
-//       first_name: "Andrei",
-//       last_name: "K",
-//       username: "kaa021088",
-//       language_code: "ru",
-//     },
-//     chat: {
-//       id: 2002404230,
-//       first_name: "Andrei",
-//       last_name: "K",
-//       username: "kaa021088",
-//       type: "private",
-//     },
-//     date: 1724313155,
-//     text: "64",
-//   },
-// };
