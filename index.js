@@ -46,7 +46,13 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     } else {
       await bot.sendMessage(
         chatId,
-        `${lang === "ru" ? "Неизвестный запрос" : "Unknown request"} "${text}"`
+        `${
+          lang === "ru" ? "Неизвестный запрос" : "Unknown request"
+        } "${text}". ${
+          lang === "ru"
+            ? "Для запуска приложения отправьте /start"
+            : "Send /start to start the app."
+        }`
       );
     }
 
